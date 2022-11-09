@@ -4,11 +4,11 @@ const date =require(__dirname + "/date.js")
 
 
 
-const app = express()
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(express.static("public"))
+const todo = express()
+todo.use(bodyParser.urlencoded({extended:true}))
+todo.use(express.static("public"))
 
-app.set("view engine","ejs")
+todo.set("view engine","ejs")
 
 
 
@@ -17,7 +17,7 @@ var items=["Buy food","Cook Food","Eat Food"];
 var workItems=[];
 
 
-app.get("/",function(req,res){
+todo.get("/",function(req,res){
     let day = date.getDay()
     // var dayNumber= today.getDay()
     
@@ -57,7 +57,7 @@ app.get("/",function(req,res){
     // }
     res.render("list",{listTitle:day,newlistItems:items});
 })
-app.post("/",function(req,res){
+todo.post("/",function(req,res){
     console.log(req.body)
     let item=req.body.newitem;
 
@@ -73,16 +73,16 @@ app.post("/",function(req,res){
 
 })
 
-app.get("/work",function(req,res){
+todo.get("/work",function(req,res){
     res.render("list",{listTitle:"Work",newlistItems: workItems});
 })
 
-app.get("/about",function(req,res){
+todo.get("/about",function(req,res){
     res.render("about")
 })
 
 
-app.listen(3500, function(){
+todo.listen(3500, function(){
     console.log("server is running at port 3500")
 })
 
